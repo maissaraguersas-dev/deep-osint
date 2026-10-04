@@ -1,0 +1,63 @@
+# ======================
+# DEEP-OSINT .gitignore
+# ======================
+
+# --- Investigation Output ---
+deep-osint-output/
+
+# --- Raw Data ---
+data/raw/
+data/cache/
+data/graph/
+
+# --- Generated Reports ---
+output/reports/
+output/exports/
+
+# --- Python ---
+.venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# --- Virtual Environments ---
+.env
+.env.local
+.env.*.local
+venv/
+ENV/
+
+# --- IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- OS ---
+.DS_Store
+Thumbs.db
+
+# --- Tool Output ---
+*.log
+
+# --- Temporary Files ---
+tmp/
+temp/
+/tmp/
+
+# --- Sensitive ---
+*.pem
+*.key
+*.cert
+credentials.json
+tokens.json
+
+# --- Tool-Specific ---
+/opt/

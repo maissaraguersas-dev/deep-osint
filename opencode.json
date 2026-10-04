@@ -1,0 +1,404 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "default_agent": "deep-osint",
+  "agent": {
+    "deep-osint": {
+      "mode": "primary",
+      "description": "Primary orchestrator — receives investigation seeds, dispatches subagents in parallel, manages the correlation graph, and produces final intelligence products.",
+      "prompt": "{file:.opencode/prompts/deep-osint-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "webfetch": true,
+        "task": true
+      },
+      "permission": {
+        "bash": {
+          "mkdir *": "allow",
+          "cat *": "allow",
+          "ls *": "allow",
+          "echo *": "allow",
+          "jq *": "allow",
+          "date *": "allow",
+          "wc *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "grep *": "allow",
+          "sort *": "allow",
+          "uniq *": "allow",
+          "cut *": "allow",
+          "tr *": "allow",
+          "sed *": "allow",
+          "awk *": "allow",
+          "find *": "allow",
+          "cp *": "allow",
+          "mv *": "allow",
+          "rm *": "allow",
+          "touch *": "allow",
+          "python3 *": "allow",
+          "curl *": "allow",
+          "wget *": "allow",
+          "nmap *": "deny",
+          "hydra *": "deny",
+          "sqlmap *": "deny",
+          "nikto *": "deny",
+          "masscan *": "deny",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-discover": {
+      "mode": "subagent",
+      "description": "Recursive entity expansion across 400+ platforms using Sherlock, Maigret, Holehe, theHarvester, Amass, and Sublist3r.",
+      "prompt": "{file:.opencode/prompts/osint-discover-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "sherlock *": "allow",
+          "maigret *": "allow",
+          "holehe *": "allow",
+          "theHarvester *": "allow",
+          "amass *": "allow",
+          "sublist3r *": "allow",
+          "ghunt *": "allow",
+          "whatweb *": "allow",
+          "exiftool *": "allow",
+          "python3 *": "allow",
+          "curl *": "allow",
+          "wget *": "allow",
+          "jq *": "allow",
+          "cat *": "allow",
+          "echo *": "allow",
+          "mkdir *": "allow",
+          "ls *": "allow",
+          "grep *": "allow",
+          "sort *": "allow",
+          "wc *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "awk *": "allow",
+          "sed *": "allow",
+          "find *": "allow",
+          "dig *": "allow",
+          "host *": "allow",
+          "nslookup *": "allow",
+          "whois *": "allow",
+          "nmap *": "deny",
+          "masscan *": "deny",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-crawl": {
+      "mode": "subagent",
+      "description": "JavaScript-aware, archive-aware content extraction using Playwright, Wayback Machine, Archive.today, Common Crawl, and document parsers.",
+      "prompt": "{file:.opencode/prompts/osint-crawl-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "python3 *": "allow",
+          "curl *": "allow",
+          "wget *": "allow",
+          "jq *": "allow",
+          "cat *": "allow",
+          "echo *": "allow",
+          "mkdir *": "allow",
+          "ls *": "allow",
+          "grep *": "allow",
+          "sort *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "awk *": "allow",
+          "sed *": "allow",
+          "find *": "allow",
+          "tesseract *": "allow",
+          "pdftotext *": "allow",
+          "cut *": "allow",
+          "tr *": "allow",
+          "wc *": "allow",
+          "touch *": "allow",
+          "cp *": "allow",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-temporal": {
+      "mode": "subagent",
+      "description": "Timeline reconstruction and pattern-of-life detection through timestamp normalization, gap analysis, frequency analysis, and chronolocation.",
+      "prompt": "{file:.opencode/prompts/osint-temporal-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "jq *": "allow",
+          "python3 *": "allow",
+          "cat *": "allow",
+          "echo *": "allow",
+          "sort *": "allow",
+          "date *": "allow",
+          "awk *": "allow",
+          "grep *": "allow",
+          "wc *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "sed *": "allow",
+          "cut *": "allow",
+          "tr *": "allow",
+          "uniq *": "allow",
+          "curl *": "allow",
+          "wget *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "mkdir *": "allow",
+          "touch *": "allow",
+          "cp *": "allow",
+          "mv *": "allow",
+          "rm *": "allow",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-behavior": {
+      "mode": "subagent",
+      "description": "Stylometric linking and bot detection through lexical, syntactic, and orthographic fingerprinting with cross-platform cosine similarity analysis.",
+      "prompt": "{file:.opencode/prompts/osint-behavior-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "python3 *": "allow",
+          "jq *": "allow",
+          "cat *": "allow",
+          "echo *": "allow",
+          "sort *": "allow",
+          "grep *": "allow",
+          "wc *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "awk *": "allow",
+          "sed *": "allow",
+          "cut *": "allow",
+          "tr *": "allow",
+          "uniq *": "allow",
+          "curl *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "mkdir *": "allow",
+          "touch *": "allow",
+          "cp *": "allow",
+          "mv *": "allow",
+          "rm *": "allow",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-infra": {
+      "mode": "subagent",
+      "description": "Deep technical reconnaissance beyond DNS — certificate transparency, passive DNS, subdomain enumeration, technology fingerprinting, exposure detection, and GitHub recon.",
+      "prompt": "{file:.opencode/prompts/osint-infra-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "amass *": "allow",
+          "sublist3r *": "allow",
+          "whatweb *": "allow",
+          "curl *": "allow",
+          "dig *": "allow",
+          "host *": "allow",
+          "nslookup *": "allow",
+          "whois *": "allow",
+          "openssl *": "allow",
+          "jq *": "allow",
+          "python3 *": "allow",
+          "cat *": "allow",
+          "echo *": "allow",
+          "mkdir *": "allow",
+          "ls *": "allow",
+          "grep *": "allow",
+          "sort *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "awk *": "allow",
+          "sed *": "allow",
+          "find *": "allow",
+          "wget *": "allow",
+          "fierce *": "allow",
+          "dnsrecon *": "allow",
+          "dnstwist *": "allow",
+          "nmap *": "deny",
+          "masscan *": "deny",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-darkweb": {
+      "mode": "subagent",
+      "description": "Tor and paste site monitoring — Ahmia.fi-indexed .onion crawling, automated paste scraping, leak detection with regex PII patterns, and forum linguistics.",
+      "prompt": "{file:.opencode/prompts/osint-darkweb-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "curl *": "allow",
+          "torsocks *": "allow",
+          "python3 *": "allow",
+          "jq *": "allow",
+          "cat *": "allow",
+          "echo *": "allow",
+          "sort *": "allow",
+          "grep *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "awk *": "allow",
+          "sed *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "mkdir *": "allow",
+          "touch *": "allow",
+          "cp *": "allow",
+          "mv *": "allow",
+          "rm *": "allow",
+          "wget *": "allow",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-geo": {
+      "mode": "subagent",
+      "description": "Multi-modal location inference through EXIF geolocation, visual geolocation (SunCalc shadow analysis), network geolocation, and linguistic geolocation.",
+      "prompt": "{file:.opencode/prompts/osint-geo-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "exiftool *": "allow",
+          "python3 *": "allow",
+          "curl *": "allow",
+          "jq *": "allow",
+          "cat *": "allow",
+          "echo *": "allow",
+          "grep *": "allow",
+          "sort *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "awk *": "allow",
+          "sed *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "mkdir *": "allow",
+          "touch *": "allow",
+          "cp *": "allow",
+          "wget *": "allow",
+          "identify *": "allow",
+          "convert *": "allow",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-synthetic": {
+      "mode": "subagent",
+      "description": "AI-generated persona detection through GAN artifact analysis, profile homogeneity checks, temporal impossibility flags, network graph analysis, and persona coherence evaluation.",
+      "prompt": "{file:.opencode/prompts/osint-synthetic-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "python3 *": "allow",
+          "jq *": "allow",
+          "cat *": "allow",
+          "echo *": "allow",
+          "grep *": "allow",
+          "sort *": "allow",
+          "wc *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "awk *": "allow",
+          "sed *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "mkdir *": "allow",
+          "touch *": "allow",
+          "cp *": "allow",
+          "mv *": "allow",
+          "rm *": "allow",
+          "curl *": "allow",
+          "wget *": "allow",
+          "*": "ask"
+        }
+      }
+    },
+    "osint-report": {
+      "mode": "subagent",
+      "description": "LLM-powered intelligence report synthesis with narrative generation, confidence scoring, bias flagging, and multi-format export (Markdown, JSON, CSV IOC).",
+      "prompt": "{file:.opencode/prompts/osint-report-prompt.txt}",
+      "tools": {
+        "read": true,
+        "write": true,
+        "edit": true,
+        "bash": true,
+        "webfetch": true
+      },
+      "permission": {
+        "bash": {
+          "cat *": "allow",
+          "echo *": "allow",
+          "jq *": "allow",
+          "ls *": "allow",
+          "grep *": "allow",
+          "sort *": "allow",
+          "wc *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "awk *": "allow",
+          "sed *": "allow",
+          "find *": "allow",
+          "mkdir *": "allow",
+          "touch *": "allow",
+          "cp *": "allow",
+          "mv *": "allow",
+          "rm *": "allow",
+          "python3 *": "allow",
+          "curl *": "allow",
+          "*": "ask"
+        }
+      }
+    }
+  }
+}
